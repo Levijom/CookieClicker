@@ -14,10 +14,11 @@ const char *options[] = {"Cursor", "Grandma", "Farm", "Mine", "Factory", "Bank",
 	"Store12", "Store13", "Store14", "Store15"};
 	
 int optionPrice[SIZE];
+int optionsIndex = 0;
 
 // Return int index in char array of possible moves
 int getOption(){
-	
+	return 0;
 }
 
 // The names of the items in the store change, this function will be called to accomidate the changes
@@ -35,28 +36,61 @@ void updateStore(){
 }
 
 void initProducer(){
-	
+	char yorn;
+	printf("Add option |%s| ?\nY/N: ",options[optionsIndex]);
+	scanf(" %c",&yorn);
+	if (yorn == 'y' || yorn == "Y"){
+		optionsIndex++;
+		printf("Option added\n");
+	}
+	else{
+		printf("Add aborted\n");
+	}
 }
 
 // A menu is given for possible options
 void printMenuOptions(){
-	printf("Select an option\n");
+	printf("\nSelect an option\n");
 	printf("----------------------------------------\n");
-	printf("-u: Update a value manually\n");
-	printf("-m: Find optimal move\n");
+	printf("-m: Find current optimal move\n");
 	printf("-s: Add new store item\n");
 	printf("-a: Add new purchasable cookie producer\n");
+	printf("-u: Update a value manually\n");
+	printf("-e: Exit program\n");
 	printf("----------------------------------------\n");
+	printf("Option: ");
 	
 }
 
 int main(void){
 	char menuInput;
 	
-	printMenuOptions();
-	scanf("%c",&menuInput);
-	printf("You chose option %c\n",menuInput);
-	printf("%s got ran over by a reindeer",options[1]);
+	while(menuInput != 'e'){
+		printMenuOptions();
+		scanf(" %c",&menuInput);
+		printf("\nYou chose option %c\n",menuInput);
+		switch(menuInput){
+			case 'a':
+			case 'A':
+				initProducer();
+				break;
+			case 'e':
+			case 'E':
+				break;
+			case 'm':
+			case 'M':
+				printf("Optimal move: %s\n",options[getOption()]);
+				break;
+			case 's':
+			case 'S':
+				updateStore();
+				break;
+			case 'u':
+			case 'U':
+				break;
+		}
+	}
+	return 0;
 }
 
 
